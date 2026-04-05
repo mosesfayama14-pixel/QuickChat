@@ -75,9 +75,9 @@ public class  UserRegistration{
     }
     public String getMessage(boolean isValid) {
         if (isValid==true) {
-            return ("Welcome" + firstName + "," + lastName + "it is great to see you again.");
+            System.out.println ("Welcome" + firstName + "," + lastName + "it is great to see you again.");
         } else {
-           return ("Username or password incorrect, please try again");
+           System.out.println ("Username or password incorrect, please try again");
         }
         
     }         
