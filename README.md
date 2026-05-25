@@ -37,10 +37,15 @@ Conclusion
 Thank you, and I am open to any questions you may have."
 
 Youtube links
+
 https://youtu.be/YLtlz88zrLg?shttps://
+
 https://youtu.be/Jhra__USVYE?si=iwu0FUW4lv40w01Y
+
 https://youtu.be/r4MLHHLctKw?si=lcq2LgoY0MPAe5Y-
+
 https://youtu.be/rWChttps:
+
 https://youtu.be/nl96BIVUM60?si=LBPJ7hr4Tmz6gQRG
 
 As mentioned in my speech in created a speech called Quickchat, evn though my mic didnt woek i managed to show how my code ran and the unit tests associated with it. With that being said that concludes part 2 of my POE assignment.
