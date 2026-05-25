@@ -1,0 +1,229 @@
+import javax.swing.JOptionPane;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Random;
+import java.util.ArrayList;
+
+class Message {
+String messageID;
+String messageHash;
+String recipient;
+String content;
+
+public Message(String id, String hash, String recipient, String content) {
+this.messageID = id;
+this.messageHash = hash;
+this.recipient = recipient;
+this.content = content;
+}
+}
+
+// --- MAIN APPLICATION CLASS ---
+public class John{
+
+private static ArrayList<Message> messageList = new ArrayList<>();
+private static int totalMessagesSent = 0;
+
+private static String registeredUser = "";
+private static String registeredPass = "";
+
+public static void main(String[] args) {
+// Step 1: Run Registration Processing Layouts
+runRegistrationWorkflow();
+
+// Step 2: Validate Login Entry Vectors
+boolean loginSuccess = runLoginWorkflow();
+
+if (!loginSuccess) {
+JOptionPane.showMessageDialog(null, "Access Denied.", "Security Notice", JOptionPane.ERROR_MESSAGE);
+return;
+}
+
+// Step 3: Display Authorized Greeting Panels
+JOptionPane.showMessageDialog(null, "Welcome to QuickChat.", "QuickChat Welcome Panel", JOptionPane.INFORMATION_MESSAGE);
+
+// Step 4: Application Menu Execution Flow
+boolean running = true;
+while (running) {
+String menu = "Please choose one of the following features from the numeric menu:\n" +
+"1) Send Messages\n" +
+"2) Show recently sent messages\n" +
+"3) Quit";
+
+String choice = JOptionPane.showInputDialog(null, menu, "Main Navigation Screen", JOptionPane.QUESTION_MESSAGE);
+
+if (choice == null || choice.equals("3")) {
+running = false;
+JOptionPane.showMessageDialog(null, "Quitting application safely...", "Exit Notification", JOptionPane.INFORMATION_MESSAGE);
+} else if (choice.equals("1")) {
+sendMessagesWorkflow();
+} else if (choice.equals("2")) {
+JOptionPane.showMessageDialog(null, "Coming Soon.", "Development Module Status", JOptionPane.WARNING_MESSAGE);
+} else {
+JOptionPane.showMessageDialog(null, "Invalid selection. Choose 1, 2, or 3.", "Input Fault Error", JOptionPane.ERROR_MESSAGE);
+}
+}
+}
+
+private static void runRegistrationWorkflow() {
+JOptionPane.showMessageDialog(null, "=== Welcome ====", "System Sign Up", JOptionPane.INFORMATION_MESSAGE);
+JOptionPane.showMessageDialog(null, "=== Registration ===");
+
+String firstName = JOptionPane.showInputDialog(null, "Enter First Name:");
+String lastName = JOptionPane.showInputDialog(null, "Enter Last Name:");
+
+registeredUser = JOptionPane.showInputDialog(null, "Create account username:");
+registeredPass = JOptionPane.showInputDialog(null, "Create account password :");
+
+JOptionPane.showMessageDialog(null, " Welcome " + firstName + " " + lastName + "!", "Registration Success", JOptionPane.INFORMATION_MESSAGE);
+}
+
+private static boolean runLoginWorkflow() {
+JOptionPane.showMessageDialog(null, "=== Account Authorization ===", "Security Screen", JOptionPane.WARNING_MESSAGE);
+
+String userAttempt = JOptionPane.showInputDialog(null, "Enter username :");
+String passAttempt = JOptionPane.showInputDialog(null, "Enter password :");
+
+if (userAttempt != null && userAttempt.equals(registeredUser) &&
+passAttempt != null && passAttempt.equals(registeredPass)) {
+JOptionPane.showMessageDialog(null, "Login succesfull.", "Access Granted", JOptionPane.INFORMATION_MESSAGE);
+return true;
+}
+return false;
+}
+
+private static void sendMessagesWorkflow() {
+String numInput = JOptionPane.showInputDialog(null, "How many total messages do you wish to enter ?", JOptionPane.QUESTION_MESSAGE);
+if (numInput == null) return;
+
+int numMessages;
+try {
+numMessages = Integer.parseInt(numInput);
+} catch (NumberFormatException e) {
+JOptionPane.showMessageDialog(null, "Invalid integer parse parameters entered. Aborting process stream.", "Parsing Value Error", JOptionPane.ERROR_MESSAGE);
+return;
+}
+
+for (int i = 0; i < numMessages; i++) {
+
+// Recipient Country Code Validation Matrix
+String recipient = "";
+while (true) {
+recipient = JOptionPane.showInputDialog(null, "(Processing Element Loop Index " + (i + 1) + " of " + numMessages + ")\nEnter recipient mobile string (incorporating international prefix dialing codes):");
+if (recipient == null) return;
+
+if (recipient.trim().length() >= 10) {
+break;
+}
+JOptionPane.showMessageDialog(null, "Format verification failure. Full international ext digits allocation values required.", "Format Data Fault", JOptionPane.ERROR_MESSAGE);
+}
+
+// Message Cap-Size Validation Pipeline
+String content = "";
+while (true) {
+content = JOptionPane.showInputDialog(null, "Enter short descriptive message(Strict 250 character cap limit bounding box):");
+if (content == null) return;
+
+if (content.length() <= 250) {
+// Exact rubric target success match text confirmation notification prompt
+JOptionPane.showMessageDialog(null, "Message sent");
+break;
+} else {
+// Exact rubric target mismatch string notification alert error statement
+JOptionPane.showMessageDialog(null, "Please enter a message of less than 250 characters.", "Text Field Size Violation", JOptionPane.ERROR_MESSAGE);
+}
+}
+
+// Autogenerating 10-Digit Unique Message ID Token Structure Blocks
+Random rand = new Random();
+long idNum = (long)(rand.nextDouble() * 9000000000L) + 1000000000L;
+String messageID = String.valueOf(idNum);
+
+// Substring Custom Hash Algorithm Token Generator Method Call Execution
+String hash = generateHash(messageID, i, content);
+
+// Output Target Command Panel Matrix Option Menu Select Strings
+String[] choices = {"S (Send Message)", "0 (Disregard Message)", "Store Message"};
+int actionChoice = JOptionPane.showOptionDialog(null,
+"Define deployment tracking command code path routing for this processing instance element:",
+"Processing Output Vector Route Options",
+JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
+
+if (actionChoice == 0) { // S Selected - Send and Commit State Write
+Message messageInstance = new Message(messageID, hash, recipient, content);
+messageList.add(messageInstance);
+totalMessagesSent++;
+
+String displayReport = "Message ID: " + messageID + "\n" +
+"Message Hash: " + hash + "\n" +
+"Recipient: " + recipient + "\n" +
+"Message: " + content;
+JOptionPane.showMessageDialog(null, displayReport, "Processing Session Sent Details Confirmation Report Sequence", JOptionPane.INFORMATION_MESSAGE);
+
+// Dynamically append collection map vector objects straight out to persistent json file structures on disk
+saveCurrentCollectionToJSONFile();
+
+} else if (actionChoice == 1) { // 0 Selected
+JOptionPane.showMessageDialog(null, "Press 0 to delete the message", "Discarding Queue Routing View", JOptionPane.INFORMATION_MESSAGE);
+} else if (actionChoice == 2) { // Store Message Selected
+Message messageInstance = new Message(messageID, hash, recipient, content);
+messageList.add(messageInstance); // Allocated safely inside system central buffer framework collections
+JOptionPane.showMessageDialog(null, "Message successfully stored", "Buffer Memory Synch Confirmation", JOptionPane.INFORMATION_MESSAGE);
+
+saveCurrentCollectionToJSONFile();
+}
+}
+
+JOptionPane.showMessageDialog(null, "Total messages sent: " + totalMessagesSent, "Task summary report", JOptionPane.INFORMATION_MESSAGE);
+}
+
+private static String generateHash(String id, int loopCounter, String content) {
+String cleanID = id.substring(0, 2);
+String[] splitWords = content.trim().split("\\s+");
+String firstWord = splitWords[0];
+String lastWord = splitWords[splitWords.length - 1];
+
+String generatedRaw = cleanID + ":" + loopCounter + ":" + firstWord + lastWord;
+return generatedRaw.toUpperCase();
+}
+
+private static void saveCurrentCollectionToJSONFile() {
+String jsonFilePath = "messages.json";
+StringBuilder jsonBuilder = new StringBuilder();
+
+jsonBuilder.append("[\n");
+for (int index = 0; index < messageList.size(); index++) {
+Message currentMessage = messageList.get(index);
+
+jsonBuilder.append(" {\n");
+jsonBuilder.append(" \"messageID\": \"").append(escapeString(currentMessage.messageID)).append("\",\n");
+jsonBuilder.append(" \"messageHash\": \"").append(escapeString(currentMessage.messageHash)).append("\",\n");
+jsonBuilder.append(" \"recipient\": \"").append(escapeString(currentMessage.recipient)).append("\",\n");
+jsonBuilder.append(" \"content\": \"").append(escapeString(currentMessage.content)).append("\"\n");
+
+if (index < messageList.size() - 1) {
+jsonBuilder.append(" },\n");
+} else {
+jsonBuilder.append(" }\n");
+}
+}
+jsonBuilder.append("]");
+
+try (FileWriter diskWriter = new FileWriter(jsonFilePath)) {
+diskWriter.write(jsonBuilder.toString());
+diskWriter.flush();
+System.out.println("Console Logs Notification Engine: Successfully synchronized persistence records inside messages.json target mapping coordinates.");
+} catch (IOException fileWriteException) {
+JOptionPane.showMessageDialog(null, "Persistence Error Event: Critical pipeline failure tracking disk operations write vector commands tasks.", "File Storage System Error", JOptionPane.ERROR_MESSAGE);
+fileWriteException.printStackTrace();
+}
+}
+private static String escapeString(String inputSourceText) {
+if (inputSourceText == null) return "";
+return inputSourceText.replace("\\", "\\\\")
+.replace("\"", "\\\"")
+.replace("\n", "\\n")
+.replace("\r", "\\r")
+.replace("\t", "\\t");
+}
+}
