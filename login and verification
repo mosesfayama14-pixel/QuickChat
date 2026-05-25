@@ -1,0 +1,26 @@
+private static void runRegistrationWorkflow() {
+JOptionPane.showMessageDialog(null, "=== Welcome ====", "System Sign Up", JOptionPane.INFORMATION_MESSAGE);
+JOptionPane.showMessageDialog(null, "=== Registration ===");
+
+String firstName = JOptionPane.showInputDialog(null, "Enter First Name:");
+String lastName = JOptionPane.showInputDialog(null, "Enter Last Name:");
+
+registeredUser = JOptionPane.showInputDialog(null, "Create account username:");
+registeredPass = JOptionPane.showInputDialog(null, "Create account password :");
+
+JOptionPane.showMessageDialog(null, " Welcome " + firstName + " " + lastName + "!", "Registration Success", JOptionPane.INFORMATION_MESSAGE);
+}
+
+private static boolean runLoginWorkflow() {
+JOptionPane.showMessageDialog(null, "=== Account Authorization ===", "Security Screen", JOptionPane.WARNING_MESSAGE);
+
+String userAttempt = JOptionPane.showInputDialog(null, "Enter username :");
+String passAttempt = JOptionPane.showInputDialog(null, "Enter password :");
+
+if (userAttempt != null && userAttempt.equals(registeredUser) &&
+passAttempt != null && passAttempt.equals(registeredPass)) {
+JOptionPane.showMessageDialog(null, "Login succesfull.", "Access Granted", JOptionPane.INFORMATION_MESSAGE);
+return true;
+}
+return false;
+}
