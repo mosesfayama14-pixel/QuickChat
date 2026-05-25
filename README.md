@@ -34,7 +34,7 @@ Conclusion
 
 "In summary, this project combines user authentication, strict input validation based on the assignment rules, dynamic ID generation, and persistent file saving to create a reliable messaging framework.
 
-Thank you, and I am open to any questions you may have."
+Thank you."
 
 Youtube links
 
@@ -48,6 +48,6 @@ https://youtu.be/rWChttps:
 
 https://youtu.be/nl96BIVUM60?si=LBPJ7hr4Tmz6gQRG
 
-As mentioned in my speech in created a speech called Quickchat, evn though my mic didnt woek i managed to show how my code ran and the unit tests associated with it. With that being said that concludes part 2 of my POE assignment.
+As mentioned in my speech in created a speech called Quickchat, evn though my mic didnt work i managed to show how my code ran and the unit tests associated with it. With that being said that concludes part 2 of my POE assignment.
 
 
