@@ -48,6 +48,6 @@ https://youtu.be/rWChttps:
 
 https://youtu.be/nl96BIVUM60?si=LBPJ7hr4Tmz6gQRG
 
-As mentioned in my speech in created a speech called Quickchat, evn though my mic didnt work i managed to show how my code ran and the unit tests associated with it. With that being said that concludes part 2 of my POE assignment.
+As mentioned in my speech in created a program called Quickchat, even though my mic didnt work I managed to show how my code ran and the unit tests associated with it. With that being said that concludes part 2 of my POE assignment.
 
 
